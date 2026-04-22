@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discord</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+        body, html {
+            margin: 0; padding: 0;
+            font-family: 'Roboto', sans-serif;
+            background-color: #5865f2;
+            height: 100vh;
+        }
+
+        /* --- PHẦN 1: DISCORD LOGIN (GIỐNG ẢNH 1) --- */
+        #discord-page {
+            height: 100vh;
+            display: flex; align-items: center; justify-content: center;
+            background: url('https://wallpapercave.com/wp/wp6601138.png') no-repeat center center/cover;
+        }
+        .login-card {
+            background-color: #313338;
+            width: 90%; max-width: 420px;
+            padding: 32px; border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            color: #dbdee1;
+        }
+        .back-btn {
+            background: #41434a; border: none; color: white;
+            padding: 6px 12px; border-radius: 4px; font-size: 14px;
+            cursor: pointer; margin-bottom: 20px;
+        }
+        .login-card h2 { color: white; text-align: center; margin: 0 0 8px 0; }
+        .login-card p { text-align: center; color: #b5bac1; font-size: 14px; margin-bottom: 24px; }
+        .label { font-size: 12px; font-weight: bold; color: #b5bac1; margin-bottom: 8px; text-transform: uppercase; }
+        .label span { color: #f23f42; }
+        .input {
+            width: 100%; padding: 12px; background: #1e1f22;
+            border: none; border-radius: 4px; color: white;
+            margin-bottom: 20px; box-sizing: border-box; outline: none;
+        }
+        .blue-link { color: #00a8fc; text-decoration: none; font-size: 14px; cursor: pointer; }
+        .btn-login {
+            width: 100%; padding: 12px; background: #5865f2;
+            color: white; border: none; border-radius: 4px;
+            font-size: 16px; font-weight: 500; margin-top: 20px; cursor: pointer;
+        }
+
+        /* --- PHẦN 2: DNKHUB (GIỐNG ẢNH 2) --- */
+        #dnkhub-page {
+            display: none;
+            background-color: #000;
+            min-height: 100vh;
+            color: white;
+        }
+        header { background: #121212; border-bottom: 2px solid #ff9900; }
+        .top-nav { display: flex; justify-content: flex-end; padding: 5px 20px; font-size: 11px; color: #ccc; gap: 15px; }
+        .main-nav { display: flex; align-items: center; padding: 10px 20px; gap: 20px; }
+        .logo { font-size: 30px; font-weight: 900; letter-spacing: -1px; }
+        .logo span { background: #ff9900; color: black; padding: 2px 5px; border-radius: 4px; margin-left: 3px; }
+        .search-bar { flex-grow: 1; display: flex; height: 35px; }
+        .search-bar input { background: #000; border: 1px solid #333; color: white; width: 100%; padding: 0 10px; }
+        .search-bar button { background: #ff9900; border: none; padding: 0 15px; font-weight: bold; cursor: pointer; }
+        
+        .cat-nav { background: #1b1b1b; padding: 10px 20px; display: flex; gap: 20px; font-size: 13px; font-weight: bold; }
+        .cat-nav span { cursor: pointer; color: #ccc; text-transform: uppercase; }
+        .cat-nav .active { color: #ff9900; }
+
+        .container { padding: 20px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 25px; }
+        .video-card { cursor: pointer; }
+        .thumb { 
+            background: #1b1b1b; width: 100%; aspect-ratio: 16/9; 
+            display: flex; align-items: center; justify-content: center;
+            border-radius: 4px; position: relative;
+            color: #ff9900; font-size: 24px; font-weight: bold; text-align: center;
+            padding: 20px; box-sizing: border-box;
+        }
+        .duration { position: absolute; bottom: 5px; right: 5px; background: rgba(0,0,0,0.8); font-size: 11px; padding: 2px 5px; color: #ff9900; }
+        .v-info { margin-top: 10px; }
+        .v-title { font-size: 14px; font-weight: bold; margin-bottom: 5px; display: block; }
+        .v-stats { font-size: 11px; color: #888; }
+        .v-stats span { color: #2ecc71; font-weight: bold; }
+
+        footer { text-align: center; padding: 40px; color: #666; font-size: 12px; border-top: 1px solid #1b1b1b; margin-top: 50px; }
+    </style>
+</head>
+<body>
+
+    <div id="discord-page">
+        <div class="login-card">
+            <button class="back-btn"> &lt; Quay lại</button>
+            <h2>Chào mừng trở lại!</h2>
+            <p>Rất vui mừng khi được gặp lại bạn!</p>
+            
+            <div class="label">Email hoặc Số Điện Thoại <span>*</span></div>
+            <input type="text" class="input" id="email">
+            
+            <div class="label">Mật khẩu <span>*</span></div>
+            <input type="password" class="input" id="pass">
+            
+            <div class="blue-link">Quên mật khẩu?</div>
+            
+            <button class="btn-login" onclick="login()">Đăng nhập</button>
+            
+            <div style="margin-top: 10px; font-size: 14px; color: #888;">
+                Cần một tài khoản? <span class="blue-link">Đăng ký</span>
+            </div>
+        </div>
+    </div>
+
+    <div id="dnkhub-page">
+        <header>
+            <div class="top-nav">Cộng đồng &bull; DNK Premium &bull; Đăng nhập / Đăng ký</div>
+            <div class="main-nav">
+                <div class="logo">DNK<span>HUB</span></div>
+                <div class="search-bar">
+                    <input type="text" placeholder="Tìm kiếm...">
+                    <button>Tìm kiếm</button>
+                </div>
+            </div>
+            <div class="cat-nav">
+                <span class="active">Trang chủ</span>
+                <span>Châu Âu</span>
+                <span>Châu Mỹ</span>
+                <span>Châu Á</span>
+                <span>Châu Phi</span>
+            </div>
+        </header>
+
+        <div class="container">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 20px;">
+                <h2 style="font-size: 18px;">Video Đề Xuất</h2>
+                <span style="color: #ff9900; font-size: 13px; font-weight: bold; cursor: pointer;">Đang xem nhiều nhất &gt;</span>
+            </div>
+
+            <div class="grid">
+                <div class="video-card" onclick="redirect()">
+                    <div class="thumb">SEX >18 VIỆT NAM <div class="duration">12:45</div></div>
+                    <div class="v-info">
+                        <span class="v-title">Việt Nam, đụ nhau trong nhà vệ sinh trường học</span>
+                        <div class="v-stats">1.5M lượt xem &bull; <span>99%</span> &bull; DNK RUIN ✅</div>
+                    </div>
+                </div>
+                <div class="video-card" onclick="redirect()">
+                    <div class="thumb">SEX NHẬT <div class="duration">08:20</div></div>
+                    <div class="v-info">
+                        <span class="v-title">Sex của Emifukada</span>
+                        <div class="v-stats">3.1K lượt xem &bull; <span>95%</span> &bull; DNK RUIN ✅</div>
+                    </div>
+                </div>
+                <div class="video-card" onclick="redirect()">
+                    <div class="thumb">COSSPLAY THỦ DÂM <div class="duration">05:15</div></div>
+                    <div class="v-info">
+                        <span class="v-title">Gái xinh cosplay thủ dâm</span>
+                        <div class="v-stats">500K lượt xem &bull; <span>100%</span> &bull; DNK RUIN ✅</div>
+                    </div>
+                </div>
+                <div class="video-card" onclick="redirect()">
+                    <div class="thumb">SEX CHÂU PHI <div class="duration">20:00</div></div>
+                    <div class="v-info">
+                        <span class="v-title">Sex châu phi cu da đen</span>
+                        <div class="v-stats">1.3M lượt xem &bull; <span>92%</span> &bull; DNK RUIN ✅</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <div style="font-size: 16px; font-weight: bold; margin-bottom: 10px; color: #888;">DNKHUB</div>
+            <p>DNKHUB.COM - Nền tảng chia sẻ SEX hay số 1 Việt Nam</p>
+            <p>© 2026 DNKHUB.COM | Tất cả quyền được bảo lưu.</p>
+        </footer>
+    </div>
+
+    <script>
+        function login() {
+            const e = document.getElementById('email').value;
+            const p = document.getElementById('pass').value;
+            if(e === "" || p === "") { alert("Nhập thông tin đã bạn ơi!"); return; }
+
+            // Giả lập loading
+            document.querySelector('.btn-login').innerText = "Đang tải...";
+            
+            setTimeout(() => {
+                document.getElementById('discord-page').style.display = 'none';
+                document.getElementById('dnkhub-page').style.display = 'block';
+                document.body.style.backgroundColor = "#000";
+                window.scrollTo(0,0);
+            }, 1200);
+        }
+
+        function redirect() {
+            window.location.href = "https://tuankiet358.github.io/DNK-RUIN-PROFILE/";
+        }
+    </script>
+</body>
+</html>
+
